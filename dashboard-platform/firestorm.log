@@ -1,0 +1,268 @@
+INFO main com.hxqh.TestFlow - 初始化数据码表............
+INFO main com.hxqh.TestFlow - 模拟kafka生产数据............
+INFO main com.hxqh.TestFlow - kafkaS实时处理数据............
+INFO Thread-0 kafka.utils.VerifiableProperties - Verifying properties
+INFO Thread-0 kafka.utils.VerifiableProperties - Property compression.codec is overridden to snappy
+INFO Thread-0 kafka.utils.VerifiableProperties - Property key.serializer.class is overridden to kafka.serializer.StringEncoder
+INFO Thread-0 kafka.utils.VerifiableProperties - Property message.send.max.retries is overridden to 2
+INFO Thread-0 kafka.utils.VerifiableProperties - Property metadata.broker.list is overridden to 192.168.145.101:9092,192.168.145.102:9092,192.168.145.103:9092
+INFO Thread-0 kafka.utils.VerifiableProperties - Property producer.type is overridden to sync
+INFO Thread-0 kafka.utils.VerifiableProperties - Property request.required.acks is overridden to 1
+INFO Thread-0 kafka.utils.VerifiableProperties - Property request.timeout.ms is overridden to 10000
+INFO Thread-0 kafka.utils.VerifiableProperties - Property retry.backoff.ms is overridden to 100
+INFO Thread-0 kafka.utils.VerifiableProperties - Property serializer.class is overridden to kafka.serializer.StringEncoder
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:2,host:192.168.145.103,port:9092 with correlation id 0 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.103:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.103:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 825 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:2,host:192.168.145.103,port:9092 with correlation id 1634 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.103:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.103:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 2453 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 3250 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 4071 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 4852 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 5647 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 6466 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 7247 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 8082 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 8843 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:2,host:192.168.145.103,port:9092 with correlation id 9626 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.103:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.103:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+WARN Thread-0 kafka.producer.async.DefaultEventHandler - Failed to send producer request with correlation id 9928 to broker 0 with data for partitions [test,0]
+java.net.SocketTimeoutException
+	at sun.nio.ch.SocketAdaptor$SocketInputStream.read(SocketAdaptor.java:211)
+	at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:103)
+	at java.nio.channels.Channels$ReadableByteChannelImpl.read(Channels.java:385)
+	at kafka.utils.Utils$.read(Utils.scala:380)
+	at kafka.network.BoundedByteBufferReceive.readFrom(BoundedByteBufferReceive.scala:54)
+	at kafka.network.Receive$class.readCompletely(Transmission.scala:56)
+	at kafka.network.BoundedByteBufferReceive.readCompletely(BoundedByteBufferReceive.scala:29)
+	at kafka.network.BlockingChannel.receive(BlockingChannel.scala:111)
+	at kafka.producer.SyncProducer.liftedTree1$1(SyncProducer.scala:75)
+	at kafka.producer.SyncProducer.kafka$producer$SyncProducer$$doSend(SyncProducer.scala:72)
+	at kafka.producer.SyncProducer$$anonfun$send$1$$anonfun$apply$mcV$sp$1.apply$mcV$sp(SyncProducer.scala:103)
+	at kafka.producer.SyncProducer$$anonfun$send$1$$anonfun$apply$mcV$sp$1.apply(SyncProducer.scala:103)
+	at kafka.producer.SyncProducer$$anonfun$send$1$$anonfun$apply$mcV$sp$1.apply(SyncProducer.scala:103)
+	at kafka.metrics.KafkaTimer.time(KafkaTimer.scala:33)
+	at kafka.producer.SyncProducer$$anonfun$send$1.apply$mcV$sp(SyncProducer.scala:102)
+	at kafka.producer.SyncProducer$$anonfun$send$1.apply(SyncProducer.scala:102)
+	at kafka.producer.SyncProducer$$anonfun$send$1.apply(SyncProducer.scala:102)
+	at kafka.metrics.KafkaTimer.time(KafkaTimer.scala:33)
+	at kafka.producer.SyncProducer.send(SyncProducer.scala:101)
+	at kafka.producer.async.DefaultEventHandler.kafka$producer$async$DefaultEventHandler$$send(DefaultEventHandler.scala:255)
+	at kafka.producer.async.DefaultEventHandler$$anonfun$dispatchSerializedData$2.apply(DefaultEventHandler.scala:106)
+	at kafka.producer.async.DefaultEventHandler$$anonfun$dispatchSerializedData$2.apply(DefaultEventHandler.scala:100)
+	at scala.collection.TraversableLike$WithFilter$$anonfun$foreach$1.apply(TraversableLike.scala:733)
+	at scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:99)
+	at scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:99)
+	at scala.collection.mutable.HashTable$class.foreachEntry(HashTable.scala:230)
+	at scala.collection.mutable.HashMap.foreachEntry(HashMap.scala:40)
+	at scala.collection.mutable.HashMap.foreach(HashMap.scala:99)
+	at scala.collection.TraversableLike$WithFilter.foreach(TraversableLike.scala:732)
+	at kafka.producer.async.DefaultEventHandler.dispatchSerializedData(DefaultEventHandler.scala:100)
+	at kafka.producer.async.DefaultEventHandler.handle(DefaultEventHandler.scala:72)
+	at kafka.producer.Producer.send(Producer.scala:77)
+	at kafka.javaapi.producer.Producer.send(Producer.scala:33)
+	at com.hxqh.bigdata.kafka.Flow_KafkaProdecer_Job.sendMassage(Flow_KafkaProdecer_Job.java:50)
+	at com.hxqh.bigdata.kafka.Flow_KafkaProdecer_Job.run(Flow_KafkaProdecer_Job.java:74)
+	at java.lang.Thread.run(Thread.java:748)
+INFO Thread-0 kafka.producer.async.DefaultEventHandler - Back off for 100 ms before retrying send. Remaining retries = 2
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 9929 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 10348 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 11133 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 11918 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 12687 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:1,host:192.168.145.102,port:9092 with correlation id 13486 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.102:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.102:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 14273 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 15050 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 15875 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:0,host:192.168.145.101,port:9092 with correlation id 16670 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.101:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.101:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO Thread-0 kafka.client.ClientUtils$ - Fetching metadata from broker id:2,host:192.168.145.103,port:9092 with correlation id 17457 for 1 topic(s) Set(test)
+INFO Thread-0 kafka.producer.SyncProducer - Connected to 192.168.145.103:9092 for producing
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from 192.168.145.103:9092
+INFO Thread-0 kafka.producer.SyncProducer - Disconnecting from node1:9092
+INFO Thread-0 kafka.producer.SyncProducer - Connected to node1:9092 for producing
+INFO main org.apache.spark.SparkContext - Running Spark version 2.1.0
+INFO main org.apache.spark.SecurityManager - Changing view acls to: wulong
+INFO main org.apache.spark.SecurityManager - Changing modify acls to: wulong
+INFO main org.apache.spark.SecurityManager - Changing view acls groups to: 
+INFO main org.apache.spark.SecurityManager - Changing modify acls groups to: 
+INFO main org.apache.spark.SecurityManager - SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(wulong); groups with view permissions: Set(); users  with modify permissions: Set(wulong); groups with modify permissions: Set()
+INFO main org.apache.spark.util.Utils - Successfully started service 'sparkDriver' on port 62086.
+INFO main org.apache.spark.SparkEnv - Registering MapOutputTracker
+INFO main org.apache.spark.SparkEnv - Registering BlockManagerMaster
+INFO main org.apache.spark.storage.BlockManagerMasterEndpoint - Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+INFO main org.apache.spark.storage.BlockManagerMasterEndpoint - BlockManagerMasterEndpoint up
+INFO main org.apache.spark.storage.DiskBlockManager - Created local directory at C:\Users\wulong\AppData\Local\Temp\blockmgr-21cfb7d5-3201-48e7-97ed-f2bfac16a6e5
+INFO main org.apache.spark.storage.memory.MemoryStore - MemoryStore started with capacity 4.1 GB
+INFO main org.apache.spark.SparkEnv - Registering OutputCommitCoordinator
+INFO main org.spark_project.jetty.util.log - Logging initialized @1833ms
+INFO main org.spark_project.jetty.server.Server - jetty-9.2.z-SNAPSHOT
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@751d3241{/jobs,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@76c7beb3{/jobs/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@64337702{/jobs/job,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@2cf92cc7{/jobs/job/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@30ea8c23{/stages,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@7b139eab{/stages/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@4e76dac{/stages/stage,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@611df6e3{/stages/stage/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@5f2f577{/stages/pool,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@6273c5a4{/stages/pool/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@5d465e4b{/storage,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@53e211ee{/storage/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@41a90fa8{/storage/rdd,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@3d8bbcdc{/storage/rdd/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@52500920{/environment,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@117e0fe5{/environment/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@18a3962d{/executors,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@78aea4b9{/executors/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@2a65bb85{/executors/threadDump,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@4b85880b{/executors/threadDump/json,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@4f936da8{/static,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@4215838f{/,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@452ba1db{/api,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@2289aca5{/jobs/job/kill,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@76a36b71{/stages/stage/kill,null,AVAILABLE}
+INFO main org.spark_project.jetty.server.ServerConnector - Started ServerConnector@6c345c5f{HTTP/1.1}{0.0.0.0:4040}
+INFO main org.spark_project.jetty.server.Server - Started @1917ms
+INFO main org.apache.spark.util.Utils - Successfully started service 'SparkUI' on port 4040.
+INFO main org.apache.spark.ui.SparkUI - Bound SparkUI to 0.0.0.0, and started at http://192.168.145.1:4040
+INFO main org.apache.spark.executor.Executor - Starting executor ID driver on host localhost
+INFO main org.apache.spark.util.Utils - Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 62105.
+INFO main org.apache.spark.network.netty.NettyBlockTransferService - Server created on 192.168.145.1:62105
+INFO main org.apache.spark.storage.BlockManager - Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+INFO main org.apache.spark.storage.BlockManagerMaster - Registering BlockManager BlockManagerId(driver, 192.168.145.1, 62105, None)
+INFO dispatcher-event-loop-10 org.apache.spark.storage.BlockManagerMasterEndpoint - Registering block manager 192.168.145.1:62105 with 4.1 GB RAM, BlockManagerId(driver, 192.168.145.1, 62105, None)
+INFO main org.apache.spark.storage.BlockManagerMaster - Registered BlockManager BlockManagerId(driver, 192.168.145.1, 62105, None)
+INFO main org.apache.spark.storage.BlockManager - Initialized BlockManager: BlockManagerId(driver, 192.168.145.1, 62105, None)
+INFO main org.spark_project.jetty.server.handler.ContextHandler - Started o.s.j.s.ServletContextHandler@169da7f2{/metrics/json,null,AVAILABLE}
+INFO main kafka.utils.VerifiableProperties - Verifying properties
+INFO main kafka.utils.VerifiableProperties - Property group.id is overridden to 
+INFO main kafka.utils.VerifiableProperties - Property zookeeper.connect is overridden to 
+INFO main kafka.consumer.SimpleConsumer - Reconnect due to socket error: java.nio.channels.ClosedChannelException
+INFO main kafka.consumer.SimpleConsumer - Reconnect due to socket error: java.nio.channels.ClosedChannelException
+INFO main kafka.consumer.SimpleConsumer - Reconnect due to socket error: java.nio.channels.ClosedChannelException
+INFO Thread-1 org.apache.spark.SparkContext - Invoking stop() from shutdown hook
+INFO Thread-1 org.spark_project.jetty.server.ServerConnector - Stopped ServerConnector@6c345c5f{HTTP/1.1}{0.0.0.0:4040}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@76a36b71{/stages/stage/kill,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@2289aca5{/jobs/job/kill,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@452ba1db{/api,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@4215838f{/,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@4f936da8{/static,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@4b85880b{/executors/threadDump/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@2a65bb85{/executors/threadDump,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@78aea4b9{/executors/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@18a3962d{/executors,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@117e0fe5{/environment/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@52500920{/environment,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@3d8bbcdc{/storage/rdd/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@41a90fa8{/storage/rdd,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@53e211ee{/storage/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@5d465e4b{/storage,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@6273c5a4{/stages/pool/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@5f2f577{/stages/pool,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@611df6e3{/stages/stage/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@4e76dac{/stages/stage,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@7b139eab{/stages/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@30ea8c23{/stages,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@2cf92cc7{/jobs/job/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@64337702{/jobs/job,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@76c7beb3{/jobs/json,null,UNAVAILABLE}
+INFO Thread-1 org.spark_project.jetty.server.handler.ContextHandler - Stopped o.s.j.s.ServletContextHandler@751d3241{/jobs,null,UNAVAILABLE}
+INFO Thread-1 org.apache.spark.ui.SparkUI - Stopped Spark web UI at http://192.168.145.1:4040
+INFO dispatcher-event-loop-2 org.apache.spark.MapOutputTrackerMasterEndpoint - MapOutputTrackerMasterEndpoint stopped!
+INFO Thread-1 org.apache.spark.storage.memory.MemoryStore - MemoryStore cleared
+INFO Thread-1 org.apache.spark.storage.BlockManager - BlockManager stopped
+INFO Thread-1 org.apache.spark.storage.BlockManagerMaster - BlockManagerMaster stopped
+INFO dispatcher-event-loop-7 org.apache.spark.scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint - OutputCommitCoordinator stopped!
+INFO Thread-1 org.apache.spark.SparkContext - Successfully stopped SparkContext
+INFO Thread-1 org.apache.spark.util.ShutdownHookManager - Shutdown hook called
+INFO Thread-1 org.apache.spark.util.ShutdownHookManager - Deleting directory C:\Users\wulong\AppData\Local\Temp\spark-be108f84-6c0c-4891-8105-e6235f926d7f
