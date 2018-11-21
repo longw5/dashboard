@@ -1,33 +1,38 @@
 package com.hxqh.bigdata.spark;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Consumer;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.api.java.function.VoidFunction;
 import org.apache.spark.streaming.Durations;
-import org.apache.spark.streaming.api.java.JavaPairInputDStream;
+import org.apache.spark.streaming.api.java.JavaDStream;
+import org.apache.spark.streaming.api.java.JavaInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
-import org.apache.spark.streaming.kafka.KafkaUtils;
+import org.apache.spark.streaming.kafka010.ConsumerStrategies;
+import org.apache.spark.streaming.kafka010.LocationStrategies;
 
 import com.hxqh.bigdata.common.Constants;
 import com.hxqh.bigdata.conf.ConfigurationManager;
 import com.hxqh.bigdata.domain.MsgParser;
 import com.hxqh.bigdata.parse.Flow_InitParseRuleMapping_Job;
 
-import kafka.serializer.StringDecoder;
 import scala.Tuple2;
 
 /**
- * 实时读取kafka数据，处理数据
+ * 1 实时读取kafka数据，处理数据
+ * 
  * @author wulong
  */
 public class Flow_DashBoardRealTimeOp_Job {
@@ -38,14 +43,15 @@ public class Flow_DashBoardRealTimeOp_Job {
 
 		// 配置spark参数
 		SparkConf sparkConf = new SparkConf().setMaster("local[2]").setAppName(Constants.SPARK_APP_NAME);
+//		SparkConf sparkConf = new SparkConf().setAppName(Constants.SPARK_APP_NAME);
 		sparkConf.set("spark.streaming.blockInterval", "50");
 
 		JavaStreamingContext javaStreamingContext = new JavaStreamingContext(sparkConf, Durations.seconds(5));
 
-		// javaStreamingContext.checkpoint("hdfs://192.168.145.101:9000/streaming_checkpoint");
+		javaStreamingContext.checkpoint("D://streaming_checkpoint");
 
 		// 配置kafka集群参数
-		Map<String, String> kafkaParams = new HashMap<>(10);
+		Map<String, Object> kafkaParams = new HashMap<>(10);
 		kafkaParams.put(Constants.KAFKA_METADATA_BROKER_LIST,
 				ConfigurationManager.getProperty(Constants.KAFKA_METADATA_BROKER_LIST));
 
@@ -58,9 +64,10 @@ public class Flow_DashBoardRealTimeOp_Job {
 		}
 
 		// 获取kafka流处理对象
-		JavaPairInputDStream<String, String> kafkaDStream = KafkaUtils.createDirectStream(javaStreamingContext,
-				String.class, String.class, StringDecoder.class, StringDecoder.class, kafkaParams, topics);
-
+		JavaInputDStream<ConsumerRecord<String, String>> kafkaDStream = org.apache.spark.streaming.kafka010.KafkaUtils
+			.createDirectStream(javaStreamingContext, LocationStrategies.PreferConsistent(),
+					ConsumerStrategies.Subscribe(topics, kafkaParams));
+		
 		logger.info("获取到流对象...............");
 
 		// 数据流处理
@@ -76,72 +83,73 @@ public class Flow_DashBoardRealTimeOp_Job {
 	}
 
 	@SuppressWarnings("serial")
-	private static void kafkaSOpStep(JavaPairInputDStream<String, String> kafkaDStream) {
+	private static void kafkaSOpStep(JavaInputDStream<ConsumerRecord<String, String>> kafkaDStream) {
 
 		Map<String, MsgParser> map = Flow_InitParseRuleMapping_Job.getMsgParser();
-		
-		kafkaDStream.map(new Function<Tuple2<String, String>, String>() {
 
-			// 获取此时段内的流数据集
-			public String call(Tuple2<String, String> v1) throws Exception {
-				return v1._2();
-			}
-		}).foreachRDD(new VoidFunction<JavaRDD<String>>() {
+		JavaDStream<Map<String,String>> kafkaStreamMap = kafkaDStream.map(new Function<ConsumerRecord<String,String>, Map<String, String>>() {
 
 			@Override
-			public void call(JavaRDD<String> v) throws Exception {
+			public Map<String, String> call(ConsumerRecord<String, String> record) throws Exception {
 				
-				List<String> collect = v.collect();
+				Map<String, String> rtMap = new HashMap<>();
 				
-				//增加指标运算
-				//新建第一个job，统计指标，更新指标库，并进行数据存储
-				//计算统计各种指标，读取hubble历史统计数据，并进行更新操作
+				String event = record.value();
 				
-				//按地区号，统计近7天区域交易量，交易排序，top10
+				Set<Entry<String, MsgParser>> entrySet = map.entrySet();
 				
-				
-				//按时间，统计近7天交易金额
-				
-				
-				//按小时统计当日，交易笔数
-				
-				
-				//当日总交易量，总交易笔数，年交易量，年交易金额
-				
-				
-				//指标存储到hubble数据库
-				
-				
-				//第二个job,交易数据存储到hive数据库中
-				//交易数据存储到hive数据库
-				//开启线程异步存储数据
-				bdataStoreHive(map, collect.iterator());
-			}
-
-			private void bdataStoreHive(Map<String, MsgParser> map, Iterator<String> iterator) {
-				try {
-					while(null != iterator && iterator.hasNext()) {
-						String next = iterator.next();
-						
-						Set<Entry<String, MsgParser>> entrySet = map.entrySet();
-						for (Entry<String, MsgParser> entry : entrySet) {
-							entry.getValue().setValue(next.substring(entry.getValue().getStart(), entry.getValue().getEnd()));
-							if(entry.getValue().getLength()==entry.getValue().getValue().length()) {
-								logger.info(entry.getValue());
-								
-								//持久化存储
-								//存储到hive中
-								
-							}else {
-								//数据报文异常，截取错误
-							}
-						}
-						logger.info("存储到hive中.........");
-						logger.info("============>处理下一条消息。");
+				for (Entry<String, MsgParser> entry : entrySet) {
+					entry.getValue()
+							.setValue(event.substring(entry.getValue().getStart(), entry.getValue().getEnd()));
+					if (entry.getValue().getLength() == entry.getValue().getValue().length()) {
+						logger.info(entry.getValue());
+						// 持久化存储
+						rtMap.put(entry.getKey(), entry.getValue().getValue());
+					} else {
+						// 数据报文异常，截取错误
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
+				return rtMap;
+			}
+		});
+		
+		kafkaStreamMap.mapToPair(new PairFunction<Map<String,String>, String, Integer>() {
+
+			@Override
+			public Tuple2<String, Integer> call(Map<String, String> map) throws Exception {
+				
+				int year = Calendar.getInstance().get(Calendar.YEAR);
+				
+				String day = map.get("DATA_ME").substring(0, 4);
+				String hours = map.get("DATA_ME").substring(4, 8);
+				return new Tuple2<String, Integer>(year+"_"+day+"_"+hours, 1);
+			}
+		}).reduceByKey(new Function2<Integer, Integer, Integer>() {
+			
+			@Override
+			public Integer call(Integer v1, Integer v2) throws Exception {
+				return v1+v2;
+			}
+		}).foreachRDD(new VoidFunction<JavaPairRDD<String,Integer>>() {
+
+			@Override
+			public void call(JavaPairRDD<String, Integer> t) throws Exception {
+				
+				t.collect().iterator().forEachRemaining(new Consumer<Tuple2<String, Integer>>() {
+
+					@Override
+					public void accept(Tuple2<String, Integer> t) {
+
+						String key = t._1;
+						
+						String year = key.split("_")[0];
+						String day = key.split("_")[1];
+						String hours = key.split("_")[2];
+						
+						Integer value = t._2;
+						//saveAsDb();
+					}
+				});
 			}
 		});
 	}
