@@ -63,7 +63,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>dashboard</finalName>
+		<finalName>dashboard-website</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
