@@ -1,0 +1,140 @@
+﻿#启动命令
+
+#启动zookeeper集群
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+
+#启动kafka集群   和jmx端口
+JMX_PORT=9999 bin/kafka-server-start.sh config/server.properties
+
+bin/kafka-topics.sh --create --zookeeper node1:2181/kafka --replication-factor 1 --partitions 1 --topic test
+
+bin/kafka-topics.sh --describe --zookeeper node1:2181,node2:2181,node3:2181/kafka_xy --topic test
+
+bin/kafka-topics.sh --create --zookeeper node1:2181/kafka --partitions 1 --topic test
+
+bin/kafka-topics.sh --create --zookeeper node1:2181,node2:2181,node3:2181/kafka_xy --replication-factor 3 --partitions 6 --topic test
+
+bin/kafka-topics.sh --delete --zookeeper node1:2181,node2:2181,node3:2181/kafka_xy --topic test
+
+
+#修改kafka的分区，重新分配
+bin/kafka-topics.sh --zookeeper node1:2181,node2:2181,node3:2181/kafka_xy --alter --topic test --partitions 6
+
+#查看单个topic的自定义配置
+bin/kafka-configs.sh --zookeeper node1:2181,node2:2181,node3:2181/kafka_xy --entity-type topics --entity-name test --describe
+
+bin/kafka-run-class.sh kafka.tools.ConsumerOffsetChecker --zookeeper node1:2181,node2:2181,node3:2181/kafka_xy --group test
+
+bin/kafka-console-producer.sh --broker-list node1:9092,node2:9092,node3:9092 --topic test
+
+bin/kafka-console-consumer.sh --zookeeper node1:2181 --topic test --from-beginning
+
+bin/kafka-console-consumer.sh --bootstrap-server node1:9092,node2:9092,node3:9092 --topic test
+
+bin/kafka-console-consumer.sh --bootstrap-server node1:9092,node2:9092,node3:9092 --topic test --from-beginning
+#启动
+
+/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper hadoop:2181 --replication-factor 1 --partitions 1 --topic urlcount3
+
+/usr/local/kafka/bin/kafka-topics.sh --list --zookeeper hadoop:2181 urlcount3
+
+/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper hadoop:2181 --replication-factor 1 --partitions 1 --topic test
+
+/usr/local/kafka/bin/kafka-console-producer.sh --broker-list hadoop:9092 --topic wangsf-test
+
+/usr/local/kafka/bin/kafka-console-producer.sh --broker-list hadoop:9092 --topic wangsf-test
+
+#查看topicd状态
+bin/kafka-topics.sh --describe --zookeeper 10.0.0.100:2181,10.0.0.101:2181,10.0.0.102:2181 --topic test  
+
+//生产数据
+flume-ng agent -n a1 -c /usr/local/flume/conf/ -f /home/hadoop/flume/conf/flume-poll.conf -Dflume.root.logger=INFO,console
+
+
+//监控kafka
+JMX_PORT=9999 bin/kafka-server-start.sh config/server.properties &
+
+
+ java监控kafka
+service:jmx:rmi:///jndi/rmi://hadoop:9999/jmxrmi
+
+JMX_PORT=9999 bin/kafka-server-start.sh config/server.properties &
+
+service:jmx:rmi:///jndi/rmi://10.38.1.7:9999/jmxrmi
+
+service:jmx:rmi:///jndi/rmi://node1:9999/jmxrmi
+
+
+
+运行zookeeper：[root@localhost kafka-0.8]# bin/zookeeper-server-start.sh config/zookeeper.properties
+运行Kafkabroker：[root@localhost kafka-0.8]#JMX_PORT=9999 bin/kafka-server-start.sh config/server.properties
+
+JMX_PORT=9999 bin/kafka-server-start.sh config/server.properties &
+
+bin/kafka-topics.sh --create --zookeeper hadoop1:2181,hadoop2:2181,hadoop3:2181 --replication-factor 3 --partitions 1 --topic test-replicated-topic
+
+bin/kafka-topics.sh --create --zookeeper node1:2181,node2:2181,node3:2181/kafka --replication-factor 3 --partitions 10 --topic aidex
+
+bin/kafka-topics.sh --describe --zookeeper node1:2181,node2:2181,node3:2181/kafka --topic aidex2
+
+bin/kafka-console-consumer.sh --zookeeper node1:2181,node2:2181,node3:2181/kafka --topic aidex
+
+bin/kafka-console-producer.sh --broker-list node1:9092,node2:9092,node3:9092 --topic aidex
+
+service:jmx:rmi:///jndi/rmi://hadoop:9999/jmxrmi
+
+#windows下开启kafka
+
+#开启zk
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+#开启kafka
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+#创建topic
+打开cmd 并进入G:\kafka_2.11-0.10.0.1\bin\windows
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+#Producer
+cd /d G:\kafka_2.11-0.10.0.1\bin\windows
+kafka-console-producer.bat --broker-list localhost:9092 --topic test
+
+#consumer
+cd /d G:\kafka_2.11-0.10.0.1\bin\windows
+kafka-console-consumer.bat --zookeeper localhost:2181 --topic test
+
+
+Java -cp KafkaOffsetMonitor-assembly-0.2.0.jar com.quantifind.kafka.offsetapp.OffsetGetterWeb --zk localhost:2181 --port 8089 --refresh 10.seconds --retain 1.days
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

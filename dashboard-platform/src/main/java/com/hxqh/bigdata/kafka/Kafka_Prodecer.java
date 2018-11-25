@@ -21,14 +21,14 @@ import scala.util.Random;
  * 
  * @author wulong
  */
-public class Flow_KafkaProdecer_Job implements Runnable {
+public class Kafka_Prodecer implements Runnable {
 
 	private static Producer<String, String> producer;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static Producer<String, String> getProducer() {
 		if (producer == null) {
-			synchronized (Flow_KafkaProdecer_Job.class) {
+			synchronized (Kafka_Prodecer.class) {
 				Properties pro = new Properties();
 				pro.setProperty("metadata.broker.list",
 						ConfigurationManager.getProperty(Constants.KAFKA_METADATA_BROKER_LIST));
@@ -70,7 +70,6 @@ public class Flow_KafkaProdecer_Job implements Runnable {
 			KeyedMessage km = new KeyedMessage(topic, k, (String) msg.get(k));
 			list.add(km);
 		}
-		System.out.println(list);
 		producer.send(list);
 	}
 
@@ -112,7 +111,7 @@ public class Flow_KafkaProdecer_Job implements Runnable {
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main3(String[] args) {
 
 		long currentTimeMillis1 = System.currentTimeMillis();
 		for (int i = 0; i < 100; i++) {
@@ -122,5 +121,23 @@ public class Flow_KafkaProdecer_Job implements Runnable {
 		}
 		long currentTimeMillis2 = System.currentTimeMillis();
 		System.out.println(currentTimeMillis2 - currentTimeMillis1);
+	}
+	
+	public static void main(String[] args) {
+		
+		Map<String, String> map = new HashMap<>();
+		
+		for (int i = 0; i < 100; i++) {
+			map.put(UUID.randomUUID().toString(), MockMessage.mockMessage());
+		}
+		
+		for (int i = 0; i < 1000000; i++) {
+			try {
+				Thread.sleep(new Random().nextInt(5000));
+				sendListMassage(ConfigurationManager.getProperty(Constants.KAFKA_TOPICS), map);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

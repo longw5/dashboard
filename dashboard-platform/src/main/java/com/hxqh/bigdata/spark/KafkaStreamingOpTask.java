@@ -6,12 +6,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.Consumer;
 
+import org.apache.hadoop.io.MD5Hash;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
@@ -20,13 +23,20 @@ import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.apache.spark.streaming.kafka010.CanCommitOffsets;
 import org.apache.spark.streaming.kafka010.ConsumerStrategies;
+import org.apache.spark.streaming.kafka010.HasOffsetRanges;
 import org.apache.spark.streaming.kafka010.LocationStrategies;
+import org.apache.spark.streaming.kafka010.OffsetRange;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.hxqh.bigdata.common.Constants;
 import com.hxqh.bigdata.conf.ConfigurationManager;
 import com.hxqh.bigdata.domain.MsgParser;
+import com.hxqh.bigdata.kafka.Kafka_Prodecer;
 import com.hxqh.bigdata.parse.Flow_InitParseRuleMapping_Job;
+import com.hxqh.bigdata.util.redis;
 
 import scala.Tuple2;
 
@@ -35,9 +45,9 @@ import scala.Tuple2;
  * 
  * @author wulong
  */
-public class Flow_DashBoardRealTimeOp_Job {
+public class KafkaStreamingOpTask {
 
-	private static Logger logger = Logger.getLogger(Flow_DashBoardRealTimeOp_Job.class);
+	private static Logger logger = Logger.getLogger(KafkaStreamingOpTask.class);
 
 	public static void sparkOpKafkaS() {
 
@@ -48,12 +58,23 @@ public class Flow_DashBoardRealTimeOp_Job {
 
 		JavaStreamingContext javaStreamingContext = new JavaStreamingContext(sparkConf, Durations.seconds(5));
 
-		javaStreamingContext.checkpoint("D://streaming_checkpoint");
+//		javaStreamingContext.checkpoint("D://streaming_checkpoint");
 
 		// 配置kafka集群参数
 		Map<String, Object> kafkaParams = new HashMap<>(10);
 		kafkaParams.put(Constants.KAFKA_METADATA_BROKER_LIST,
 				ConfigurationManager.getProperty(Constants.KAFKA_METADATA_BROKER_LIST));
+		kafkaParams.put("bootstrap.servers", ConfigurationManager.getProperty(Constants.KAFKA_METADATA_BROKER_LIST));
+		kafkaParams.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		kafkaParams.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+		//读取消息  early lastest none
+		kafkaParams.put("auto.offset.reset", "latest ");
+		//一次最大拉取消息
+		kafkaParams.put("max.poll.records", "200");	
+		//是否正常提交
+		kafkaParams.put("enable.auto.commit", "false");
+		//消费者线程组
+		kafkaParams.put("group.id", "consumer_test");
 
 		// 构建topic set
 		String kafkaTopics = ConfigurationManager.getProperty(Constants.KAFKA_TOPICS);
@@ -71,8 +92,19 @@ public class Flow_DashBoardRealTimeOp_Job {
 		logger.info("获取到流对象...............");
 
 		// 数据流处理
-		kafkaSOpStep(kafkaDStream);
-
+		if(kafkaSOpStep(kafkaDStream)) {
+			kafkaDStream.foreachRDD(new VoidFunction<JavaRDD<ConsumerRecord<String,String>>>() {
+	
+				@Override
+				public void call(JavaRDD<ConsumerRecord<String, String>> t) throws Exception {
+					//获取偏移量
+					OffsetRange[] offsetRanges = ((HasOffsetRanges)(t.rdd())).offsetRanges();
+					//手动提交offset
+					((CanCommitOffsets)kafkaDStream.inputDStream()).commitAsync(offsetRanges);
+				}
+			});
+		}
+		
 		javaStreamingContext.start();
 		try {
 			javaStreamingContext.awaitTermination();
@@ -83,36 +115,49 @@ public class Flow_DashBoardRealTimeOp_Job {
 	}
 
 	@SuppressWarnings("serial")
-	private static void kafkaSOpStep(JavaInputDStream<ConsumerRecord<String, String>> kafkaDStream) {
+	private static boolean kafkaSOpStep(JavaInputDStream<ConsumerRecord<String, String>> kafkaDStream) {
 
+		//获取解析器
 		Map<String, MsgParser> map = Flow_InitParseRuleMapping_Job.getMsgParser();
 
+		//报文解析，提取，数据判断
 		JavaDStream<Map<String,String>> kafkaStreamMap = kafkaDStream.map(new Function<ConsumerRecord<String,String>, Map<String, String>>() {
 
 			@Override
 			public Map<String, String> call(ConsumerRecord<String, String> record) throws Exception {
 				
 				Map<String, String> rtMap = new HashMap<>();
-				
 				String event = record.value();
-				
 				Set<Entry<String, MsgParser>> entrySet = map.entrySet();
 				
-				for (Entry<String, MsgParser> entry : entrySet) {
-					entry.getValue()
-							.setValue(event.substring(entry.getValue().getStart(), entry.getValue().getEnd()));
-					if (entry.getValue().getLength() == entry.getValue().getValue().length()) {
-						logger.info(entry.getValue());
-						// 持久化存储
-						rtMap.put(entry.getKey(), entry.getValue().getValue());
-					} else {
-						// 数据报文异常，截取错误
+				//为了手动更新offset中， 数据已入库但是没有手动提交offset的问题，
+				//解决重复消费message的问题，
+				MD5Hash digest = MD5Hash.digest(event);
+				//快速存入redis中
+				if(redis.get(digest)==null) {
+					redis.put(digest);
+					//根据不同的报文去解析
+					for (Entry<String, MsgParser> entry : entrySet) {
+						entry.getValue()
+								.setValue(event.substring(entry.getValue().getStart(), entry.getValue().getEnd()));
+						if (entry.getValue().getLength() == entry.getValue().getValue().length()) {
+							logger.info(entry.getValue());
+							// 持久化存储
+							rtMap.put(entry.getKey(), entry.getValue().getValue());
+						} else {
+							// 数据报文异常，截取错误
+							Kafka_Prodecer.sendMassage("error", UUID.randomUUID().toString(), event);
+						}
 					}
+				}else {
+					//重复数据，不进行处理
 				}
 				return rtMap;
 			}
 		});
 		
+		//具体业务处理
+		JsonArray jsonArray = new JsonArray();
 		kafkaStreamMap.mapToPair(new PairFunction<Map<String,String>, String, Integer>() {
 
 			@Override
@@ -133,31 +178,35 @@ public class Flow_DashBoardRealTimeOp_Job {
 		}).foreachRDD(new VoidFunction<JavaPairRDD<String,Integer>>() {
 
 			@Override
-			public void call(JavaPairRDD<String, Integer> t) throws Exception {
+			public void call(JavaPairRDD<String, Integer> args) throws Exception {
 				
-				t.collect().iterator().forEachRemaining(new Consumer<Tuple2<String, Integer>>() {
+				args.collect().iterator().forEachRemaining(new Consumer<Tuple2<String, Integer>>() {
 
 					@Override
 					public void accept(Tuple2<String, Integer> t) {
-
-						String key = t._1;
 						
-						String year = key.split("_")[0];
-						String day = key.split("_")[1];
-						String hours = key.split("_")[2];
+						JsonObject jsonObject = new JsonObject();
+						String year = t._1.split("_")[0];
+						String day = t._1.split("_")[1];
+						String hours = t._1.split("_")[2];
 						
-						Integer value = t._2;
-						//saveAsDb();
+						jsonObject.addProperty("year", year);
+						jsonObject.addProperty("day", day);
+						jsonObject.addProperty("hours", hours);
+						jsonArray.add(jsonObject);
 					}
 				});
+				
 			}
 		});
+		Kafka_Prodecer.sendMassage("test", UUID.randomUUID().toString(), jsonArray.toString());
+		return true;
 	}
 
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		// kafka+sparkstreaming 实时解析，处理数据
-		new Flow_DashBoardRealTimeOp_Job().sparkOpKafkaS();
+		new KafkaStreamingOpTask().sparkOpKafkaS();
 	}
 
 }

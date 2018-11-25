@@ -2,7 +2,7 @@ package com.hxqh.bigdata.dashboard;
 
 import org.apache.log4j.Logger;
 
-import com.hxqh.bigdata.kafka.Flow_KafkaProdecer_Job;
+import com.hxqh.bigdata.kafka.Kafka_Prodecer;
 
 public class TestFlow {
 
@@ -22,7 +22,7 @@ public class TestFlow {
 		// 启动kafka生产线程，模拟收发消息
 		logger.info("模拟kafka生产数据............");
 		try {
-			new Thread(new Flow_KafkaProdecer_Job()).start();
+			new Thread(new Kafka_Prodecer()).start();
 			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();

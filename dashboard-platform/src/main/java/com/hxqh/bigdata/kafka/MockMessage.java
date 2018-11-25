@@ -234,7 +234,7 @@ public class MockMessage {
 		System.out.println(rec_address.length());*/
 		
 		if(new Random().nextInt(11)%5 == 0) {
-			message = "3003";
+			message = "3001";
 		}else {
 			message = "3001";
 		}
