@@ -3,6 +3,7 @@ package com.hxqh.bigdata.spark;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
@@ -93,6 +95,7 @@ public class KafkaStreamingOpTask {
 
 		// 数据流处理
 		if(kafkaSOpStep(kafkaDStream)) {
+			
 			kafkaDStream.foreachRDD(new VoidFunction<JavaRDD<ConsumerRecord<String,String>>>() {
 	
 				@Override
