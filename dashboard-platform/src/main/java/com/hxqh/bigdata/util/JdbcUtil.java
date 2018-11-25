@@ -1,9 +1,14 @@
 package com.hxqh.bigdata.util;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 获取连接的工具类
@@ -47,6 +52,90 @@ public class JdbcUtil {
         if(conn != null){
                 conn.close();
         }
+    }
+    
+    /**
+     * orm映射
+     * 查询单条数据
+     * @param sql
+     * @param className
+     * @return
+     */
+    public static Map<String, String> querySingle(String sql, String className){
+    	
+    	Map<String, String> map = new HashMap<>();
+    	Connection conn = null;
+    	Statement st = null;
+    	ResultSet rs = null;
+    	Class<?> class1;
+    	
+    	try {
+			conn = JdbcUtil.getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				try {
+					class1 = Class.forName(className);
+					Field[] declaredFields = class1.getDeclaredFields();
+					for (int i = 0; i < declaredFields.length; i++) {
+						String field = declaredFields[i].getName();
+						String value = rs.getString(field);
+						map.put(field, value);
+					}
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+    	} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			HubbleConnUtils.release(conn, st, rs);
+		}
+    	return map;
+    }
+    
+    
+    /**
+     * orm映射
+     * @param sql
+     * @param className
+     * @return
+     */
+    public static List<Map<String, String>> query(String sql, String className){
+    	
+    	List<Map<String, String>> list = null;
+    	Connection conn = null;
+    	Statement st = null;
+    	ResultSet rs = null;
+    	Class<?> class1;
+    	
+    	try {
+			conn = JdbcUtil.getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				list = new ArrayList<>();
+				Map<String, String> map = null;
+				try {
+					class1 = Class.forName(className);
+					map = new HashMap<>();
+					Field[] declaredFields = class1.getDeclaredFields();
+					for (int i = 0; i < declaredFields.length; i++) {
+						String field = declaredFields[i].getName();
+						String value = rs.getString(field);
+						map.put(field, value);
+					}
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				list.add(map);
+			}
+    	} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			HubbleConnUtils.release(conn, st, rs);
+		}
+    	return list;
     }
 
 }

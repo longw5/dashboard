@@ -38,6 +38,12 @@ public class HubbleConnUtils {
 		return connection;
 	}
 	
+	/**
+	 * 释放连接
+	 * @param conn
+	 * @param st
+	 * @param rs
+	 */
 	public static void release(Connection conn,Statement st,ResultSet rs){
 		if(rs != null){
 			try {
