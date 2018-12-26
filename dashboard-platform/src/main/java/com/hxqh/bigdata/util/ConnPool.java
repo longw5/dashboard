@@ -17,7 +17,7 @@ import com.hxqh.bigdata.conf.ConfigurationManager;
 /**
  * 简单实现数据库连接池
  * 采用代理模式
- * @author wds
+ * @author wl
  *
  */
 public class ConnPool implements DataSource {
@@ -29,7 +29,7 @@ public class ConnPool implements DataSource {
 	private static final String url = ConfigurationManager.getProperty(Constants.JDBC_URL);
 	private static final String username = ConfigurationManager.getProperty(Constants.JDBC_USER);
 	private static final String password = ConfigurationManager.getProperty(Constants.JDBC_PASSWORD);
-	private static final int InitSize = 10;
+	private static final int InitSize = 50;
 
     //在静态代码块中加载配置文件
     static{
@@ -107,11 +107,6 @@ public class ConnPool implements DataSource {
     public Connection getConnection(String username, String password)
             throws SQLException {
         return null;
-    }
-
-    public static void main(String[] args) {
-
-    
     }
 
 }
