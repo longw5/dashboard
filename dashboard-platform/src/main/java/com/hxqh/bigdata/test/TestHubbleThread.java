@@ -13,8 +13,8 @@ import com.hxqh.bigdata.util.ConnPool;
 
 public class TestHubbleThread {
 
-	private static ConnPool connPool = new ConnPool();
 	private static List<String> list = new ArrayList<>();
+	private static ConnPool connPool = ConnPool.newInstance(50);
 	private static HubbleUpdateTask updatetask = new HubbleUpdateTask(connPool, list);
 	private static HubbleInsertTask inserttask = new HubbleInsertTask(connPool);
 
@@ -45,6 +45,7 @@ public class TestHubbleThread {
 	public static void main(String[] args) {
 
 		ExecutorService executorService = Executors.newFixedThreadPool(20);
+		
 		for (int i = 0; i < 20; i++) {
 			if (i % 2 == 0) {
 				executorService.execute(updatetask);
@@ -62,7 +63,7 @@ public class TestHubbleThread {
 	 */
 	public static void main2(String[] args) throws SQLException {
 
-		ConnPool connPool = new ConnPool();
+		ConnPool connPool = ConnPool.newInstance(10);
 		Connection conn = connPool.getConnection();
 		PreparedStatement ps = conn.prepareStatement("show tables");
 		ResultSet rs = ps.executeQuery();

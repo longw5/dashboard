@@ -3,9 +3,7 @@ package com.hxqh.bigdata.test;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.UUID;
-
 import com.hxqh.bigdata.util.ConnPool;
-
 import scala.util.Random;
 
 public class HubbleInsertTask implements Runnable {

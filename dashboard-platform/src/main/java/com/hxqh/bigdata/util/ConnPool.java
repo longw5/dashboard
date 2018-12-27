@@ -24,14 +24,24 @@ public class ConnPool implements DataSource {
 
     //使用LinkedList集合存放数据库连接
     private static LinkedList<Connection> connPool = new LinkedList<Connection>();
+    private static ConnPool pool = new ConnPool();
     
+    private static int InitSize;
 	private static final String driver = ConfigurationManager.getProperty(Constants.JDBC_DRIVER);
 	private static final String url = ConfigurationManager.getProperty(Constants.JDBC_URL);
 	private static final String username = ConfigurationManager.getProperty(Constants.JDBC_USER);
 	private static final String password = ConfigurationManager.getProperty(Constants.JDBC_PASSWORD);
-	private static final int InitSize = 50;
 
-    //在静态代码块中加载配置文件
+	private ConnPool() {
+		super();
+	}
+	
+	public static ConnPool newInstance(int initSize) {
+		InitSize = initSize;
+		return pool;
+	}
+
+	//在静态代码块中加载配置文件
     static{
         try {
             //加载驱动
