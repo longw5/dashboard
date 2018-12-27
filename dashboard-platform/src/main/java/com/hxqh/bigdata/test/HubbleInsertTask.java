@@ -11,7 +11,11 @@ import scala.util.Random;
 
 public class HubbleInsertTask implements Runnable {
 
-	public static ConnPool connPool = new ConnPool();
+	private ConnPool connPool;
+
+	public HubbleInsertTask(ConnPool connPool) {
+		this.connPool = connPool;
+	}
 
 	@Override
 	public void run() {
