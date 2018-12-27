@@ -1,7 +1,6 @@
 package com.hxqh.bigdata.test;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.UUID;
 
@@ -28,8 +27,7 @@ public class HubbleInsertTask implements Runnable {
 		Connection conn;
 		try {
 			conn = connPool.getConnection();
-			int executeUpdate = conn.createStatement().executeUpdate(sql);
-			System.out.println(executeUpdate);
+			conn.createStatement().executeUpdate(sql);
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
